@@ -1,0 +1,250 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "AlmaraiLocal";
+  src: url("/fonts/Almarai-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "AlmaraiLocal";
+  src: url("/fonts/Almarai-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "AlmaraiLocal";
+  src: url("/fonts/Almarai-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "AlmaraiLocal";
+  src: url("/fonts/Almarai-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "InterLocal";
+  src: url("/fonts/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "InterLocal";
+  src: url("/fonts/Inter-Italic-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "InstrumentSerifLocal";
+  src: url("/fonts/InstrumentSerif-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "InstrumentSerifLocal";
+  src: url("/fonts/InstrumentSerif-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+:root {
+  --color-page: #faf7f2;
+  --color-footer: #b0c3e8;
+  --color-bubble: #e8e8eb;
+  --color-glass: #ffffff18;
+  --color-primary: #1a0f0a;
+  --color-body: #1a1a1a;
+  --color-muted: #333436;
+  --color-brand: #3d2c1a;
+  --color-meta: #8e8e93;
+  --color-footer-mark: #9eb4dc;
+  --color-glass-border: #ffffff45;
+  --color-social-border: #ffffff80;
+  --shadow-bubble: 0 1px 2px rgb(0 0 0 / 8%), 0 1px 3px rgb(0 0 0 / 10%);
+  --shadow-glass: inset 0 1.4px 9px rgb(255 255 255 / 60%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-page);
+  color: var(--color-primary);
+  font-family: "AlmaraiLocal", sans-serif;
+}
+
+:root {
+  --font-ui: "AlmaraiLocal", sans-serif;
+  --font-serif-display: "InstrumentSerifLocal", serif;
+  --font-body-copy: "AlmaraiLocal", sans-serif;
+  --font-message-copy: "InterLocal", sans-serif;
+}
+
+.font-spec-serif {
+  font-family: "InstrumentSerifLocal", serif !important;
+  font-weight: 400 !important;
+}
+
+.font-spec-body {
+  font-family: "AlmaraiLocal", sans-serif !important;
+  font-weight: 400 !important;
+}
+
+.font-spec-message {
+  font-family: "InterLocal", sans-serif !important;
+  font-weight: 400 !important;
+}
+
+@keyframes swirlDrift {
+  0% {
+    transform: translateX(-22%);
+  }
+  100% {
+    transform: translateX(22%);
+  }
+}
+
+.bubble-pop {
+  animation: bubblePop 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes bubblePop {
+  0% {
+    transform: translateY(16px) scale(0.96);
+  }
+  60% {
+    transform: translateY(0) scale(1.02);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes revealIn {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.reveal-seq {
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  animation: revealIn 450ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Sequential reveal — pure CSS, no JS state required.
+   Explicit opacity:0 hides elements immediately (don't rely on animation-fill-mode:backwards
+   which Safari may skip on the first paint). animation-fill-mode:forwards overrides the
+   opacity:0 base once the animation completes — this is guaranteed by the CSS spec
+   (animation fills sit outside the normal cascade and cannot be overridden by regular rules). */
+.reveal-beat-0,
+.reveal-beat-1,
+.reveal-beat-2,
+.reveal-beat-3,
+.reveal-beat-4,
+.reveal-beat-5,
+.reveal-beat-6,
+.reveal-beat-7 {
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  pointer-events: none;
+}
+
+.reveal-beat-0 { animation: revealIn 650ms cubic-bezier(0.22, 1, 0.36, 1)  800ms forwards; }
+.reveal-beat-1 { animation: revealIn 650ms cubic-bezier(0.22, 1, 0.36, 1) 1700ms forwards; }
+.reveal-beat-2 { animation: revealIn 650ms cubic-bezier(0.22, 1, 0.36, 1) 2700ms forwards; }
+.reveal-beat-3 { animation: revealIn 650ms cubic-bezier(0.22, 1, 0.36, 1) 3800ms forwards; }
+.reveal-beat-4 { animation: revealIn 650ms cubic-bezier(0.22, 1, 0.36, 1) 5100ms forwards; }
+.reveal-beat-5 { animation: revealIn 650ms cubic-bezier(0.22, 1, 0.36, 1) 6500ms forwards; }
+.reveal-beat-6 { animation: revealIn 650ms cubic-bezier(0.22, 1, 0.36, 1) 8000ms forwards; }
+.reveal-beat-7 { animation: revealIn 650ms cubic-bezier(0.22, 1, 0.36, 1) 9400ms forwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-beat-0, .reveal-beat-1, .reveal-beat-2, .reveal-beat-3,
+  .reveal-beat-4, .reveal-beat-5, .reveal-beat-6, .reveal-beat-7 {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    animation: none;
+  }
+}
+
+/* Legacy JS-driven class (kept for reference) */
+.reveal-anim {
+  animation: revealIn 450ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.reveal-delay-700 {
+  animation-delay: 700ms;
+}
+
+.reveal-delay-1400 {
+  animation-delay: 1400ms;
+}
+
+.reveal-delay-2200 {
+  animation-delay: 2200ms;
+}
+
+.reveal-delay-3000 {
+  animation-delay: 3000ms;
+}
+
+.reveal-delay-3600 {
+  animation-delay: 3600ms;
+}
+
+.reveal-delay-3900 {
+  animation-delay: 3900ms;
+}
+
+.reveal-delay-4200 {
+  animation-delay: 4200ms;
+}
+
+.swirl-shader {
+  position: relative;
+  overflow: hidden;
+  background-color: #d3deeb;
+  background-image:
+    linear-gradient(90deg, #b0c3e8 0%, #d3deeb 12%, #d3deeb 88%, #b0c3e8 100%),
+    radial-gradient(92% 52% at 50% 2%, rgb(176 195 232 / 75%) 0%, rgb(176 195 232 / 8%) 62%, rgb(176 195 232 / 0%) 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%, 100% 100%;
+}
+
+.swirl-shader::before {
+  content: "";
+  position: absolute;
+  inset: -8% -30%;
+  pointer-events: none;
+  background: radial-gradient(
+    34% 125% at 50% 50%,
+    rgb(176 195 232 / 56%) 0%,
+    rgb(176 195 232 / 22%) 36%,
+    rgb(176 195 232 / 0%) 68%
+  );
+  animation: swirlDrift 6.5s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.swirl-shader > * {
+  position: relative;
+  z-index: 1;
+}
