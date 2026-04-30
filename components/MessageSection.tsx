@@ -27,7 +27,7 @@ export function MessageSection({
       </div>
       <p
         data-reveal={`section-${index}-beat-2`}
-        className={`${beatTwoClassName} font-spec-body m-0 text-right text-[11px] leading-relaxed tracking-[0.1px] text-[var(--color-muted)]`}
+        className={`${beatTwoClassName} font-spec-body m-0 text-right text-sm leading-[1.55] tracking-[0.1px] text-[var(--color-muted)]`}
       >
         {section.caption}
       </p>

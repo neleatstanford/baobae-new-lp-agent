@@ -7,8 +7,8 @@ type AvatarStackProps = {
 };
 
 export function AvatarStack({ recipients, size = "sm" }: AvatarStackProps) {
-  const dimensions = size === "lg" ? "h-11 w-11" : "h-3.5 w-3.5";
-  const iconSize = size === "lg" ? 44 : 14;
+  const dimensions = size === "lg" ? "h-11 w-11" : "h-[18px] w-[18px]";
+  const iconSize = size === "lg" ? 44 : 18;
 
   return (
     <div className="flex items-center">

@@ -2,7 +2,6 @@
 
 import { GlassPill } from "@/components/GlassPill";
 import { MessageSection } from "@/components/MessageSection";
-import { AvatarStack } from "@/components/AvatarStack";
 import { closing, heroCopy, messageSections, topbarIconUrl } from "@/lib/content";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -96,10 +95,10 @@ export default function Home() {
           <h1 className="font-spec-serif m-0 text-7xl italic tracking-[-3px] text-[var(--color-primary)]">
             {heroCopy.brand}
           </h1>
-          <p className="font-spec-body m-0 w-[289px] text-center text-sm leading-relaxed tracking-[0.1px] text-[var(--color-primary)]">
+          <p className="font-spec-body m-0 w-[320px] text-center text-base leading-[1.55] tracking-[0.1px] text-[var(--color-primary)]">
             {heroCopy.subheading}
           </p>
-          <p className="font-spec-body m-0 mt-2 text-center text-sm leading-relaxed tracking-[0.1px] text-[var(--color-muted)]">
+          <p className="font-spec-body m-0 mt-2 text-center text-[15px] leading-relaxed tracking-[0.1px] text-[var(--color-muted)]">
             {heroCopy.scrollHint}
           </p>
         </section>
@@ -116,37 +115,49 @@ export default function Home() {
           ))}
         </section>
 
-        <section className="mt-[72px] flex flex-col items-center gap-6 px-4">
-          <div className="reveal-beat-6">
+        <section className="mt-[40px] flex flex-col items-center px-4">
+          <div className="reveal-pill">
             <GlassPill label={closing.cta} iconUrl={topbarIconUrl} />
           </div>
           <h2
-            className="reveal-beat-6 m-0 flex w-[320px] flex-wrap justify-center gap-x-2 gap-y-0.5 text-center"
+            className="reveal-beat-6 m-0 mt-10 mb-10 flex w-[320px] flex-wrap items-baseline justify-center gap-x-2 gap-y-0.5 text-center"
           >
             {closing.words.map((word) => {
               const italic = word === "Less" || word === "more";
               return (
                 <span
                   key={word}
-                  className={`font-spec-serif text-[25px] leading-[1.1] tracking-[-1px] text-[var(--color-primary)] ${italic ? "italic" : ""}`}
+                  className={`font-spec-serif text-3xl leading-[1.1] tracking-[-1px] text-[var(--color-primary)] ${italic ? "italic" : ""}`}
                 >
                   {word}
                 </span>
               );
             })}
           </h2>
-          <div
-            className="reveal-beat-7 relative inline-flex items-center"
-          >
-            <AvatarStack
-              recipients={[
-                { id: "a", imageUrl: closing.avatars[0], alt: "Couple avatar 1" },
-                { id: "b", imageUrl: closing.avatars[1], alt: "Couple avatar 2" },
-              ]}
-              size="lg"
-            />
-            <span className="pointer-events-none absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-base leading-none">
-              💓
+          {/* reveal-beat-7 hides the whole block until 9400ms (proven reliable).
+               couple-slide-* add the horizontal spring on top of that. */}
+          <div className="reveal-beat-7 relative inline-flex items-center">
+            <div className="couple-slide-left h-11 w-11 overflow-hidden rounded-full">
+              <Image
+                src={closing.avatars[0]}
+                alt="Couple avatar 1"
+                width={44}
+                height={44}
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="couple-slide-right -ml-0.5 h-11 w-11 overflow-hidden rounded-full">
+              <Image
+                src={closing.avatars[1]}
+                alt="Couple avatar 2"
+                width={44}
+                height={44}
+                className="h-full w-full object-cover"
+              />
+            </div>
+            {/* Outer span: absolute positioning only. Inner span: scale animation. */}
+            <span className="pointer-events-none absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
+              <span className="couple-heart block text-base leading-none">💓</span>
             </span>
           </div>
         </section>

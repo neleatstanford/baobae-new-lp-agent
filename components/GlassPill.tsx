@@ -16,7 +16,7 @@ export function GlassPill({ label, iconUrl, className = "" }: GlassPillProps) {
       {iconUrl ? (
         <Image src={iconUrl} alt="" width={17} height={17} aria-hidden />
       ) : null}
-      <span className="font-spec-body text-sm tracking-[-0.1px] text-[var(--color-brand)]">
+      <span className="font-spec-body text-base tracking-[-0.1px] text-[var(--color-brand)]">
         {label}
       </span>
     </button>

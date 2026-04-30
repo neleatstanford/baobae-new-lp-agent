@@ -172,8 +172,8 @@ body {
 .reveal-beat-3 { animation: revealIn 650ms cubic-bezier(0.22, 1, 0.36, 1) 3800ms forwards; }
 .reveal-beat-4 { animation: revealIn 650ms cubic-bezier(0.22, 1, 0.36, 1) 5100ms forwards; }
 .reveal-beat-5 { animation: revealIn 650ms cubic-bezier(0.22, 1, 0.36, 1) 6500ms forwards; }
-.reveal-beat-6 { animation: revealIn 650ms cubic-bezier(0.22, 1, 0.36, 1) 8000ms forwards; }
-.reveal-beat-7 { animation: revealIn 650ms cubic-bezier(0.22, 1, 0.36, 1) 9400ms forwards; }
+.reveal-beat-6 { animation: revealIn 650ms cubic-bezier(0.22, 1, 0.36, 1)  9300ms forwards; }
+.reveal-beat-7 { animation: revealIn 650ms cubic-bezier(0.22, 1, 0.36, 1) 10500ms forwards; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal-beat-0, .reveal-beat-1, .reveal-beat-2, .reveal-beat-3,
@@ -188,6 +188,66 @@ body {
 /* Legacy JS-driven class (kept for reference) */
 .reveal-anim {
   animation: revealIn 450ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Couple avatar slide-together animation ──────────────────────────────── */
+/* Opacity is handled by the reveal-beat-7 parent wrapper (proven reliable).
+   These classes only animate the horizontal transform so a CSS load failure
+   degrades gracefully — avatars still appear, just without the slide. */
+
+.couple-slide-left {
+  transform: translateX(-18px);
+  animation: coupleSlideLeft 750ms cubic-bezier(0.22, 1, 0.36, 1) 10500ms both;
+}
+
+.couple-slide-right {
+  transform: translateX(18px);
+  animation: coupleSlideRight 750ms cubic-bezier(0.22, 1, 0.36, 1) 10650ms both;
+}
+
+@keyframes coupleSlideLeft {
+  0%   { transform: translateX(-18px); }
+  65%  { transform: translateX(3px); }   /* slight overshoot toward center */
+  100% { transform: translateX(0); }
+}
+
+@keyframes coupleSlideRight {
+  0%   { transform: translateX(18px); }
+  65%  { transform: translateX(-3px); }  /* slight overshoot toward center */
+  100% { transform: translateX(0); }
+}
+
+/* Pill reveal + bounce — same 8000ms trigger as reveal-beat-6.
+   Single keyframe: reveal phase (0-60%) then a small bounce (60-100%). */
+.reveal-pill {
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  pointer-events: none;
+  animation: revealPillBounce 1050ms cubic-bezier(0.22, 1, 0.36, 1) 8000ms forwards;
+}
+
+@keyframes revealPillBounce {
+  0%   { opacity: 0; transform: translateY(16px) scale(0.97); }
+  60%  { opacity: 1; transform: translateY(0) scale(1); }
+  75%  { transform: translateY(-5px) scale(1.03); }
+  88%  { transform: translateY(1px) scale(0.99); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Heart pops once when avatars have met (~400ms after parent reveals).
+   Outer span handles absolute positioning; this class only animates scale. */
+.couple-heart {
+  opacity: 0;
+  transform: scale(0);
+  animation: heartPop 650ms linear 10900ms forwards;
+}
+
+@keyframes heartPop {
+  0%   { opacity: 0; transform: scale(0); }
+  55%  { opacity: 1; transform: scale(1.5); }
+  75%  { transform: scale(0.85); }
+  90%  { transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 .reveal-delay-700 {
